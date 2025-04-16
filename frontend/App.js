@@ -161,7 +161,7 @@ export function ProductManagementScreen({ navigation }) {
     if (!validateInputs()) return;
 
     try {
-      await axios.post('http://192.168.1.6:5000/products', {
+      await axios.post('http://your_ip:5000/products', {
         product_name: productName,
         product_price: productPrice,
         product_stock: productStock,
@@ -221,7 +221,7 @@ function SalesHistoryScreen() {
   useEffect(() => {
     const fetchSalesHistory = async () => {
       try {
-        const response = await axios.get('http://192.168.1.6:5000/sales_history');
+        const response = await axios.get('http://your_ip:5000/sales_history');
         // console.log('Fetched Sales History:', response.data.data);
         setSalesHistory(response.data.data);
       } catch (error) {
@@ -275,7 +275,7 @@ export function SalesManagementScreen({ navigation }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://192.168.1.6:5000/products');
+        const response = await axios.get('http://your_ip:5000/products');
         setProducts(response.data.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -327,7 +327,7 @@ export function SalesManagementScreen({ navigation }) {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.6:5000/sales', {
+      const response = await axios.post('http://your_ip:5000/sales', {
         product_id: productId,
         sale_quantity: parseInt(saleQuantity),
         customer_name: customerName,
@@ -470,7 +470,7 @@ export  function PaymentScreen({ navigation }) {
     if (!validateInputs()) return;
 
     try {
-      const response = await axios.post('http://192.168.1.6:5000/payments', {
+      const response = await axios.post('http://your_ip:5000/payments', {
         customer_name: customerName,
         customer_phone: phoneNumber,
         due_amount: dueAmount,
@@ -541,7 +541,7 @@ export function PendingPaymentsScreen() {
 
   const fetchPendingPayments = async () => {
     try {
-      const response = await axios.get('http://192.168.1.6:5000/payments');
+      const response = await axios.get('http://your_ip:5000/payments');
       setPendingPayments(response.data.data);
     } catch (error) {
       Alert.alert('Error', 'Could not load pending payments.');
@@ -554,7 +554,7 @@ export function PendingPaymentsScreen() {
 
   const deletePayment = async (paymentId) => {
     try {
-      await axios.delete(`http://192.168.1.6:5000/payments/${paymentId}`);
+      await axios.delete(`http://your_ip:5000/payments/${paymentId}`);
       Alert.alert('Success', 'Payment record deleted successfully.');
       setPendingPayments((prev) => prev.filter((payment) => payment.payment_id !== paymentId));
     } catch {
@@ -637,7 +637,7 @@ export function InventoryScreen() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://192.168.1.6:5000/products');
+      const response = await axios.get('http://your_ip:5000/products');
       if (response.data.data && response.data.data.length > 0) {
         setProducts(response.data.data);
         setFilteredProducts(response.data.data); // Initialize filtered products
@@ -661,7 +661,7 @@ export function InventoryScreen() {
     }
 
     try {
-      await axios.put(`http://192.168.1.6:5000/products/${productId}`, {
+      await axios.put(`http://your_ip:5000/products/${productId}`, {
         product_stock: stock,
       });
 
@@ -700,7 +700,7 @@ export function InventoryScreen() {
   // Function to delete the product
   const deleteProduct = async (productId) => {
     try {
-      const response = await axios.delete(`http://192.168.1.6:5000/products/${productId}`);
+      const response = await axios.delete(`http://your_ip:5000/products/${productId}`);
       
       if (response.status === 200) {
         Alert.alert('Success', response.data.message || 'Product deleted successfully');
